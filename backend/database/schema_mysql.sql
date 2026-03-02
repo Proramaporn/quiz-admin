@@ -1,0 +1,18 @@
+-- Exam Management System - MySQL Schema
+
+CREATE TABLE exams (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    question TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE choices (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    exam_id INT(11) UNSIGNED NOT NULL,
+    choice_text TEXT NOT NULL,
+    CONSTRAINT fk_exam
+        FOREIGN KEY (exam_id) 
+        REFERENCES exams(id) 
+        ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
